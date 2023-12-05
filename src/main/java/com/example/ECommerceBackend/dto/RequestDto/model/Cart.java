@@ -1,4 +1,4 @@
-package com.example.ECommerceBackend.model;
+package com.example.ECommerceBackend.dto.RequestDto.model;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

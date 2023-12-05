@@ -1,4 +1,4 @@
-package com.example.ECommerceBackend.model;
+package com.example.ECommerceBackend.dto.RequestDto.model;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="order")
+@Table(name="ordered")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Ordered {

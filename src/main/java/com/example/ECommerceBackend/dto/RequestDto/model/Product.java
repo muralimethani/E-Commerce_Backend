@@ -1,4 +1,4 @@
-package com.example.ECommerceBackend.model;
+package com.example.ECommerceBackend.dto.RequestDto.model;
 
 import com.example.ECommerceBackend.Enum.ProductCategory;
 import jakarta.persistence.*;
