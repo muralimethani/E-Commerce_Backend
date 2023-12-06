@@ -1,6 +1,5 @@
-package com.example.ECommerceBackend.dto.RequestDto.model;
+package com.example.ECommerceBackend.model;
 
-import com.example.ECommerceBackend.Enum.ProductCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,25 +11,27 @@ import lombok.experimental.FieldDefaults;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="product")
+@Table(name ="Item")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Product {
+public class Item{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     String name;
 
-    int price;
+    int requiredQuantity;
 
-    int quantity;
-
-    @Enumerated(EnumType.STRING)
-    ProductCategory category;
-
-    // Child for Seller
+    // Child class For Order
     @ManyToOne
     @JoinColumn
-    Seller seller;
+    Ordered order;
+
+
+
+    // Child for Cart
+    @ManyToOne
+    @JoinColumn
+    Cart cart;
 }

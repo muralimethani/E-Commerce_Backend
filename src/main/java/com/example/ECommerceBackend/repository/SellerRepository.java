@@ -1,6 +1,6 @@
 package com.example.ECommerceBackend.repository;
 
-import com.example.ECommerceBackend.dto.RequestDto.model.Seller;
+import com.example.ECommerceBackend.model.Seller;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

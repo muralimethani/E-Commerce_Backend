@@ -1,7 +1,5 @@
-package com.example.ECommerceBackend.dto.RequestDto.model;
+package com.example.ECommerceBackend.model;
 
-
-import com.example.ECommerceBackend.Enum.CardType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,32 +8,35 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="card")
+@Table(name="ordered")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Card {
+public class Ordered {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    int cvv;
+    String orderNo;
 
-    @Column(unique = true, nullable = false)
-    String cardNo;
+    int totalValue;
 
-    Date expiryDate;
+    Date orderDate;
 
-    @Enumerated(EnumType.STRING)
-    CardType cardType;
+    String cardUsed;
 
-    // Child class for Customer class
+    // Parent for Item
+    @OneToMany(mappedBy ="order", cascade = CascadeType.ALL)
+    List<Item> items = new ArrayList<>();
+
+    // Child for Customer
     @ManyToOne
     @JoinColumn
     Customer customer;
-
 }
