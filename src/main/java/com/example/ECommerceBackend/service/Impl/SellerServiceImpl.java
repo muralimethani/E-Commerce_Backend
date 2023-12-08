@@ -120,4 +120,6 @@ public class SellerServiceImpl implements SellerService {
         sellerRepository.deleteById(id);
         return SellerTransformer.getSeller(seller);
     }
+
+
 }

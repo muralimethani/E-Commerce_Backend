@@ -2,10 +2,7 @@ package com.example.ECommerceBackend.service;
 
 import com.example.ECommerceBackend.dto.RequestDto.SellerRequestDto;
 import com.example.ECommerceBackend.dto.RequestDto.UpdateSellerRequestDto;
-import com.example.ECommerceBackend.dto.ResponseDto.DeletedSellerResponseById;
-import com.example.ECommerceBackend.dto.ResponseDto.GetSellerResponseDto;
-import com.example.ECommerceBackend.dto.ResponseDto.SellerResponseDto;
-import com.example.ECommerceBackend.dto.ResponseDto.UpdateSellerResponseDto;
+import com.example.ECommerceBackend.dto.ResponseDto.*;
 import com.example.ECommerceBackend.exception.DuplicateSellerException;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +22,7 @@ public interface SellerService {
 
     String deleteSellerByEmailId(String emailId) throws Exception;
     DeletedSellerResponseById deleteById(int id) throws Exception;
+
+//    List<ProductResponseDto> getAllAvailableProducts() throws Exception;
 
 }
