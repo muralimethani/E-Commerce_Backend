@@ -1,2 +1,24 @@
-package com.example.ECommerceBackend.dto.RequestDto;public class CustomerRequestDto {
+package com.example.ECommerceBackend.dto.RequestDto;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+
+public class CustomerRequestDto {
+
+    String name;
+
+    String emailId;
+
+    Integer age;
+
+    String mobile;
+
+    String address;
+
 }

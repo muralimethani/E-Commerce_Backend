@@ -1,4 +1,4 @@
-package com.example.ECommerceBackend.dto.ResponseDto;
+package com.example.ECommerceBackend.dto.RequestDto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,13 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-public class CustomerResponseDto {
-
-    String name;
-
+public class UpdateCustomerRequestDto {
     String mobile;
-
-    String message;
-
+    int age;
 }

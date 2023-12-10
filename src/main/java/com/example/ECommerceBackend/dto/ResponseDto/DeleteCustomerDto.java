@@ -8,13 +8,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-public class CustomerResponseDto {
-
+public class DeleteCustomerDto {
     String name;
-
     String mobile;
-
     String message;
-
 }
