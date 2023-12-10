@@ -2,6 +2,7 @@ package com.example.ECommerceBackend.transformer;
 
 import com.example.ECommerceBackend.dto.RequestDto.CardRequestDto;
 import com.example.ECommerceBackend.dto.ResponseDto.CardResponseDto;
+import com.example.ECommerceBackend.dto.ResponseDto.CardResponseDto2;
 import com.example.ECommerceBackend.model.Card;
 
 public class CardTransformer {
@@ -23,12 +24,12 @@ public class CardTransformer {
                 .build();
     }
 
-//    public static CardResponseDto cardToCardResponseDto(Card card){
-//        return CardResponseDto.builder()
-//                .customerName(card.getCustomer().getName())
-//                .cardNo(card.getCardNo())
-//                .cvv(card.getCvv())
-//                .expiryDate(card.getExpiryDate())
-//                .cardType(card.getCardType()).build();
-//    }
+    public static CardResponseDto2 CardToCardResponseDto2(Card card){
+        return CardResponseDto2.builder()
+                .customerName(card.getCustomer().getName())
+                .cardNo(card.getCardNo())
+                .cvv(card.getCvv())
+                .expiryDate(card.getExpiryDate())
+                .cardType(card.getCardType()).build();
+    }
 }
