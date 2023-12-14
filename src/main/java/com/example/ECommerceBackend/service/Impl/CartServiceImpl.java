@@ -1,15 +1,14 @@
 package com.example.ECommerceBackend.service.Impl;
 
+import com.example.ECommerceBackend.dto.RequestDto.CheckOutCartRequestDto;
 import com.example.ECommerceBackend.dto.ResponseDto.CartResponseDto;
 import com.example.ECommerceBackend.dto.ResponseDto.ItemResponseDto;
-import com.example.ECommerceBackend.model.Cart;
-import com.example.ECommerceBackend.model.Customer;
-import com.example.ECommerceBackend.model.Item;
-import com.example.ECommerceBackend.repository.CardRepository;
-import com.example.ECommerceBackend.repository.CartRepository;
-import com.example.ECommerceBackend.repository.CustomerRepository;
-import com.example.ECommerceBackend.repository.ProductRepository;
+import com.example.ECommerceBackend.dto.ResponseDto.OrderResponseDto;
+import com.example.ECommerceBackend.exception.InvalidCustomerException;
+import com.example.ECommerceBackend.model.*;
+import com.example.ECommerceBackend.repository.*;
 import com.example.ECommerceBackend.service.CartService;
+import com.example.ECommerceBackend.service.OrderService;
 import com.example.ECommerceBackend.transformer.ItemTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,17 @@ public class CartServiceImpl implements CartService {
     @Autowired
     CustomerRepository customerRepository;
 
-    @Autowired
-    ProductRepository productRepository;
 //    @Autowired
-//    CartRepository cartRepository;
+//    ProductRepository productRepository;
+
+    @Autowired
+    CardRepository cardRepository;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    OrderedRepository orderedRepository;
 
     public CartResponseDto saveCart(int customerId, Item item){
 //        int cartTotal;
@@ -58,5 +64,55 @@ public class CartServiceImpl implements CartService {
 
         cartResponseDto.setItems(itemResponseDtos);
         return cartResponseDto;
+    }
+
+    public OrderResponseDto checkOutCart(CheckOutCartRequestDto checkOutCartRequestDto) throws Exception {
+        Customer customer;
+        try {
+            customer = customerRepository.findById(checkOutCartRequestDto.getCustomerId()).get();
+        }catch (Exception e){
+            throw new InvalidCustomerException("Customer Don't exist with given Id!!!");
+        }
+
+        Card card = cardRepository.findById(checkOutCartRequestDto.getCustomerId()).get();
+        if(card == null || card.getCvv() != checkOutCartRequestDto.getCvv() || card.getCustomer() != customer){
+            throw new Exception("Invalid Card!!!");
+        }
+
+        Cart cart = customer.getCart();
+        if(cart.getNumberOfItems() == 0){
+            throw new Exception("Cart is Empty!!");
+        }
+
+        try {
+            Ordered order = orderService.placeOrder(customer, card);
+            customer.getOrderList().add(order);
+            resetCart(cart);
+
+            Ordered savedOrder = orderedRepository.save(order);
+
+            // prepare response dto
+            OrderResponseDto orderResponseDto = new OrderResponseDto();
+            orderResponseDto.setOrderDate(savedOrder.getOrderDate());
+            orderResponseDto.setOrderNo(savedOrder.getOrderNo());
+            orderResponseDto.setCustomerName(customer.getName());
+            orderResponseDto.setTotalValue(savedOrder.getTotalValue());
+            orderResponseDto.setCardUsed(savedOrder.getCardUsed());
+
+            List<ItemResponseDto> items = new ArrayList<>();
+            for(Item  item : savedOrder.getItems()){
+                ItemResponseDto itemResponseDto = ItemTransformer.ItemToItemResponseDto(item);
+                items.add(itemResponseDto);
+            }
+            orderResponseDto.setItems(items);
+            return orderResponseDto;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    public void resetCart(Cart cart){
+        cart.setItems(new ArrayList<>());
+        cart.setNumberOfItems(0);
+        cart.setTotalCost(0);
     }
 }

@@ -5,6 +5,7 @@ import com.example.ECommerceBackend.dto.RequestDto.ProductRequestDto;
 import com.example.ECommerceBackend.dto.ResponseDto.DeleteProductResponseDto;
 import com.example.ECommerceBackend.dto.ResponseDto.ProductResponseDto;
 import com.example.ECommerceBackend.exception.InvalidSellerException;
+import com.example.ECommerceBackend.model.Item;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface ProductService {
     ProductResponseDto cheapestProductInCategory(String category);
 
     ProductResponseDto costliestProductInCategory(String productCategory);
+
+    void decreaseProductQuantity(Item item) throws Exception;
 }
