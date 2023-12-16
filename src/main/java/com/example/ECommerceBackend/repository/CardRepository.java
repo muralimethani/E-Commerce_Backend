@@ -15,4 +15,6 @@ public interface CardRepository extends JpaRepository<Card, Integer> {
 
     @Query(value = "SELECT * FROM Card c WHERE c.expiry_Date>='2025-01-01'", nativeQuery = true)
     List<Card> getMasterCardsWithExpiryDateGreaterThan2k25();
+
+    Card findByCardNo(String  cardNo);
 }

@@ -202,13 +202,15 @@ public class ProductServiceImpl implements ProductService {
 
     public void decreaseProductQuantity(Item item) throws Exception {
         Product product = item.getProduct();
-        int currentQuantity = product.getQuantity();
+//        int currentQuantity = product.getQuantity();
+//        int quantity = item.getRequiredQuantity();
         int quantity = item.getRequiredQuantity();
-        if(quantity > currentQuantity){
+        int currQuantity = product.getQuantity();
+        if(quantity > currQuantity){
             throw new Exception("Out of Stock");
         }
 
-        product.setQuantity(currentQuantity-quantity);
+        product.setQuantity(currQuantity-quantity);
         if(product.getQuantity()==0){
             product.setProductStatus(ProductStatus.OUT_OF_STOCK);
         }
