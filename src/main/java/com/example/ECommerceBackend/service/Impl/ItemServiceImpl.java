@@ -2,15 +2,20 @@ package com.example.ECommerceBackend.service.Impl;
 
 import com.example.ECommerceBackend.Enum.ProductStatus;
 import com.example.ECommerceBackend.dto.RequestDto.ItemRequestDto;
+import com.example.ECommerceBackend.dto.ResponseDto.CartItemResponseDto;
+import com.example.ECommerceBackend.dto.ResponseDto.DeleteOrderResponseDto;
+import com.example.ECommerceBackend.dto.ResponseDto.ItemResponseDto;
 import com.example.ECommerceBackend.exception.InvalidCustomerException;
 import com.example.ECommerceBackend.exception.InvalidProductException;
 import com.example.ECommerceBackend.model.*;
 import com.example.ECommerceBackend.repository.CustomerRepository;
 import com.example.ECommerceBackend.repository.ItemRepository;
+import com.example.ECommerceBackend.repository.OrderedRepository;
 import com.example.ECommerceBackend.repository.ProductRepository;
 import com.example.ECommerceBackend.service.ItemService;
 import com.example.ECommerceBackend.service.ProductService;
 import com.example.ECommerceBackend.transformer.ItemTransformer;
+import com.example.ECommerceBackend.transformer.OrderTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +37,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     ProductService productService;
+    @Autowired
+    private OrderedRepository orderedRepository;
 
     public Item addItem(ItemRequestDto itemRequestDto) throws Exception {
 

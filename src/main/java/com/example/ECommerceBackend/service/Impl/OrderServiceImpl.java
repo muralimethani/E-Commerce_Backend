@@ -1,8 +1,10 @@
 package com.example.ECommerceBackend.service.Impl;
 
 import com.example.ECommerceBackend.dto.RequestDto.OrderRequestDto;
+import com.example.ECommerceBackend.dto.ResponseDto.DeleteOrderResponseDto;
 import com.example.ECommerceBackend.dto.ResponseDto.ItemResponseDto;
 import com.example.ECommerceBackend.dto.ResponseDto.OrderResponseDto;
+import com.example.ECommerceBackend.dto.ResponseDto.OrderResponseDto2;
 import com.example.ECommerceBackend.exception.InvalidCustomerException;
 import com.example.ECommerceBackend.exception.InvalidProductException;
 import com.example.ECommerceBackend.model.*;
@@ -132,7 +134,7 @@ public class OrderServiceImpl implements OrderService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("muralirgukt10@gmail.com");
         message.setTo(customer.getEmailId());
-        message.setSubject("ECommerce Shop Marathahalli" + "Order Placed Successfully");
+        message.setSubject("ECommerce Shop Marathahalli: " + " Order Placed Successfully");
         message.setText(text);
         mailSender.send(message);
 
@@ -145,5 +147,45 @@ public class OrderServiceImpl implements OrderService {
         }
         orderResponseDto.setItems(itemResponseDtos);
         return orderResponseDto;
+    }
+
+    public List<OrderResponseDto2> ordersList(int customerId) throws InvalidCustomerException {
+        Customer customer;
+        try {
+            customer = customerRepository.findById(customerId).get();
+        }catch (Exception e){
+            throw new InvalidCustomerException("Customer not exist with given Id!!");
+        }
+
+        List<Ordered> orders = customer.getOrderList();
+        List<OrderResponseDto2> orderResponseDto2s = new ArrayList<>();
+        for(Ordered ordered : orders){
+            orderResponseDto2s.add(OrderTransformer.OrderToOrderResponseDto2(ordered));
+        }
+//        System.out.println(customer.getName());
+        return orderResponseDto2s;
+    }
+
+    public List<OrderResponseDto2> getRecent5orders(int customerId){
+        List<Ordered> orderedList = orderedRepository.getRecent5orders();
+        List<OrderResponseDto2> resultList = new ArrayList<>();
+        for(Ordered ordered : orderedList){
+            resultList.add(OrderTransformer.OrderToOrderResponseDto2(ordered));
+        }
+        return resultList;
+    }
+
+    public DeleteOrderResponseDto deleteOrder(int id) throws Exception {
+        Ordered ordered = null;
+        try {
+            ordered = orderedRepository.findById(id).get();
+        }catch (Exception e){
+            throw new Exception("Order is Exist with given Id!!");
+        }
+
+        orderedRepository.deleteById(id);
+
+        DeleteOrderResponseDto deleteOrderResponseDto = OrderTransformer.deleteOrderResponseDto(ordered);
+        return deleteOrderResponseDto;
     }
 }
