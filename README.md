@@ -25,6 +25,8 @@
 ## EER Diagram
 ![Schema](https://user-images.githubusercontent.com/116377954/222906823-f7682629-2383-496b-91a0-923bcedd9b00.png)
 
+## List of API's
+[List of APIs.pdf](https://github.com/muralimethani/E-Commerce_Backend/files/13742322/List.of.APIs.pdf)
 
 
 
