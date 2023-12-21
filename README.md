@@ -1,16 +1,5 @@
 # ECommerce Backend Application
 
-## Table of contents
-
-1. ###### [Technology Used](https://github.com/muralimethani/E-Commerce_Backend/blob/master/README.md#techonology-used)
-
-2. ###### [EER Diagram](https://github.com/muralimethani/E-Commerce_Backend/assets/116708943/ba8bac95-3f76-49fe-b879-61911266d77c)
-
- 
-3. ###### [Functionalities](https://github.com/muralimethani/E-Commerce_Backend/blob/master/README.md#functionalities)
-
-4. ###### [Postman Commands](https://github.com/muralimethani/E-Commerce_Backend/blob/master/README.md#postman-commands)
-
 
  
 
@@ -135,10 +124,10 @@
 
 	localhost:8080/customer/updateByEmailId?emailId=iamIronMan@com
   
-  {
-    "mobile" : "9999999999",
-    "age" : 53
-}
+  	{
+    	"mobile" : "9999999999",
+    	"age" : 53
+	}
 
 
 
@@ -146,11 +135,11 @@
 
 	localhost:8080/cart/checkout
   
-{
-    "customerId":1,
-    "cardNumber":2233445566,
-    "cvv":9876
-}
+	{
+    	"customerId":1,
+    	"cardNumber":2233445566,
+    	"cvv":9876
+	}
 
 
 
@@ -164,14 +153,13 @@
 ###### Place Order Directly:	
 
 	localhost:8080/order/place
-  
-{
-    "customerId":1,
-    "productId":1,
-    "requiredQuantity":1,
-    "cardNo":2233445566,
-    "cvv":9876
-}
+	{
+    	"customerId":1,
+    	"productId":1,
+    	"requiredQuantity":1,
+    	"cardNo":2233445566,
+    	"cvv":9876
+	}
 
 
 ###### Get Recent 5 Orders:	
