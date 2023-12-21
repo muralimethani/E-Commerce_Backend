@@ -26,9 +26,9 @@
 ![Schema](https://user-images.githubusercontent.com/116377954/222906823-f7682629-2383-496b-91a0-923bcedd9b00.png)
 
 ## List of API's
-[List of APIs.pdf](https://github.com/muralimethani/E-Commerce_Backend/files/13742322/List.of.APIs.pdf)
-
-
+![List of APIs_page-0001](https://github.com/muralimethani/E-Commerce_Backend/assets/116708943/b00705a2-20d6-4f2d-a649-72462244a3f2)
+![List of APIs_page-0002](https://github.com/muralimethani/E-Commerce_Backend/assets/116708943/52292d67-18d5-45b9-8c8a-b7df70cf342d)
+![List of APIs_page-0003](https://github.com/muralimethani/E-Commerce_Backend/assets/116708943/198e73cc-9346-466b-9700-275f3c0239e9)
 
 
 
